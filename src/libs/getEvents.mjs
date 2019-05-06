@@ -1,4 +1,5 @@
-require('dotenv').config()
+import dotenv from 'dotenv'
+dotenv.config()
 import puppeteer from 'puppeteer'
 
 async function getEvents () {
@@ -12,6 +13,7 @@ async function getEvents () {
   await page.waitForNavigation()
   console.log('Logged in.')
   
+  console.log('Scrapping...')
   const data = await page.evaluate(() => {
     let events = []
   
@@ -27,7 +29,8 @@ async function getEvents () {
 
     return events
   })
-  
+  console.log('Scrapping finished.')
+
   await browser.close()
 
   return data

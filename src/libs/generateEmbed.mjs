@@ -1,4 +1,5 @@
-require('dotenv').config()
+import dotenv from 'dotenv'
+dotenv.config()
 
 function generateEmbed (title, date, img = process.env.GUILD_THUMBNAIL_URL) {
   return {

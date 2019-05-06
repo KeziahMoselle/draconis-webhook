@@ -5,17 +5,13 @@
   "repository": "https://github.com/KeziahMoselle/draconis-bot.git",
   "author": "KeziahMoselle <keziah.moselle@gmail.com>",
   "scripts": {
-    "start": "yarn build && node build/index.js",
-    "build": "babel src -d build"
+    "start": "node --experimental-modules src/index"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "diff": "^4.0.1",
     "dotenv": "^8.0.0",
     "puppeteer": "^1.15.0"
   },
-  "license": "MIT",
-  "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.4",
-    "@babel/plugin-transform-modules-commonjs": "^7.4.4"
-  }
+  "license": "MIT"
 }

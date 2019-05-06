@@ -1,4 +1,4 @@
-import getEvents from './getEvents'
+import getEvents from './getEvents.mjs'
 
 
 async function getGuildEvents () {
