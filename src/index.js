@@ -1,8 +1,9 @@
 require('dotenv').config()
 import Discord from 'discord.js'
-const client = new Discord.Client()
 import getGuildEvents from './libs/getGuildEvents'
 import generateEmbed from './libs/generateEmbed'
+
+const client = new Discord.Client()
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}`)
