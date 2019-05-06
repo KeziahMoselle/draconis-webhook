@@ -4,4 +4,4 @@ import crawl from './libs/crawl.mjs'
 
 crawl()
 
-setInterval(crawl, 3600000)
+setInterval(crawl, 1000 * 60 * 60) // Every hour

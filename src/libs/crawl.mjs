@@ -29,16 +29,27 @@ async function crawl () {
       // Check for differences between new events and file
       // To detect new events
       try {
-        const oldEvents = fs.readFileSync('events.json', 'utf8')
-        const newEvents = JSON.stringify(guildEvents)
-        console.log(oldEvents)
-        console.log(newEvents)
-        // If there is a difference -> Post the last/new event
-        const result = Diff.diffJson(oldEvents, newEvents)
-        console.log(result)
+        const data = fs.readFileSync('events.json', 'utf8')
+        const oldEvents = JSON.parse(data)
+        const lastOldEvent = oldEvents[oldEvents.length - 1]
+        const lastCurrentEvent = guildEvents[guildEvents.length - 1]
+
+        if (lastOldEvent.date !== lastCurrentEvent.date) {
+          console.log('New event detected.')
+          const embed = generateEmbed(lastCurrentEvent.title, lastCurrentEvent.date)
+          axios.post(process.env.DISCORD_WEBHOOK_URL, embed)
+        } else {
+          console.log('No new event detected.')
+        }
+        
       } catch (error) {
         console.log(error)
       }
+
+      // Save file for next check
+      fs.writeFile('events.json', JSON.stringify(guildEvents), error => {
+        if (error) console.log(error)
+      })
     }
   })
 }

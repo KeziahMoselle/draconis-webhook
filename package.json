@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "diff": "^4.0.1",
     "dotenv": "^8.0.0",
     "puppeteer": "^1.15.0"
   },
