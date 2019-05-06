@@ -9,7 +9,6 @@
     "build": "babel src -d build"
   },
   "dependencies": {
-    "discord.js": "^11.4.2",
     "dotenv": "^8.0.0",
     "puppeteer": "^1.15.0"
   },
