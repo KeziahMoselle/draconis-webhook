@@ -2,7 +2,6 @@ import dotenv from 'dotenv'
 dotenv.config()
 import fs from 'fs'
 import axios from 'axios'
-import Diff from 'diff'
 import getGuildEvents from './getGuildEvents.mjs'
 import generateEmbed from './generateEmbed.mjs'
 
