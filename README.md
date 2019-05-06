@@ -1,3 +1,13 @@
-# draconis-bot
+# draconis-webhook
 
-Draconis is a bot for the World of Warcraft <Draconis Impura> guild. It sends our in game events to a dedicated channel named #events.
+This WebHook sends new guild events to a Discord channel.
+
+## How it works ?
+
+[Since Blizzard still does not offer in its public API the ability to retrieve data from the guild calendar](https://us.battle.net/forums/en/bnet/topic/13979457879?page=1) , this project scrapes the page: [https://eu.battle.net/wow/en/vault/character/event](https://eu.battle.net/wow/en/vault/character/event) to get the guild events.
+
+## Tech stack
+
+- Node.js
+  - [Puppeteer](https://pptr.dev/)
+  - [Axios](https://github.com/axios/axios)
