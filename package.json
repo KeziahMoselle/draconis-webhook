@@ -1,11 +1,21 @@
 {
   "name": "draconis-bot",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": "https://github.com/KeziahMoselle/draconis-bot.git",
   "author": "KeziahMoselle <keziah.moselle@gmail.com>",
+  "scripts": {
+    "start": "yarn build && node build/index.js",
+    "build": "babel src -d build"
+  },
   "dependencies": {
+    "discord.js": "^11.4.2",
     "puppeteer": "^1.15.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4"
+  }
 }
