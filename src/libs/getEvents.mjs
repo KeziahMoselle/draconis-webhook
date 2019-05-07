@@ -3,7 +3,9 @@ dotenv.config()
 import puppeteer from 'puppeteer'
 
 async function getEvents () {
-  const browser = await puppeteer.launch()
+  const browser = await puppeteer.launch({
+    headless: process.env.NODE_ENV === 'development' ? false : true
+  })
   const page = await browser.newPage()
   await page.goto('https://eu.battle.net/wow/fr/vault/character/event')
   await page.type('#accountName', process.env.BLIZZARD_EMAIL)
@@ -15,16 +17,16 @@ async function getEvents () {
   
   console.log('Scrapping...')
   const data = await page.evaluate(() => {
-    let events = []
+    const events = []
   
-    let eventsElements = document.querySelectorAll('.event-summary')
+    const eventsElements = document.querySelectorAll('.event-summary')
 
     eventsElements.forEach(eventElement => {
-      let eventData = {}
-      eventData.title = eventElement.querySelector('.name').innerText
-      eventData.date = eventElement.querySelector('.datetime').innerText
-      eventData.img = eventElement.querySelector('img').src
-      events.push(eventData)
+      events.push({
+        title: eventElement.querySelector('.name').innerText,
+        date: eventElement.querySelector('.datetime').innerText,
+        img: eventElement.querySelector('img').src
+      })
     })
 
     return events

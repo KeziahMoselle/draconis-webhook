@@ -1,9 +1,8 @@
 import dotenv from 'dotenv'
 dotenv.config()
 import fs from 'fs'
-import axios from 'axios'
 import getGuildEvents from './getGuildEvents.mjs'
-import generateEmbed from './generateEmbed.mjs'
+import sendToWebhook from './sendToWebhook.mjs';
 
 async function crawl () {
   const guildEvents = await getGuildEvents()
@@ -18,10 +17,7 @@ async function crawl () {
       })
 
       // Send all current events to the WebHook
-      guildEvents.forEach(event => {
-        const embed = generateEmbed(event.title, event.date)
-        axios.post(process.env.DISCORD_WEBHOOK_URL, embed)
-      })
+      guildEvents.forEach(event => sendToWebhook(event))
     } else {
       // Send only new events here
       
@@ -33,21 +29,22 @@ async function crawl () {
         const lastOldEvent = oldEvents[oldEvents.length - 1]
         const lastCurrentEvent = guildEvents[guildEvents.length - 1]
 
+        console.log(`Old Event - [${lastOldEvent.date}]`)
+        console.log(`Current Event - [${lastCurrentEvent.date}]`)
         if (lastOldEvent.date !== lastCurrentEvent.date) {
           console.log('New event detected.')
-          const embed = generateEmbed(lastCurrentEvent.title, lastCurrentEvent.date)
-          axios.post(process.env.DISCORD_WEBHOOK_URL, embed)
+          sendToWebhook(lastCurrentEvent)
         } else {
           console.log('No new event detected.')
         }
-        
       } catch (error) {
         console.log(error)
       }
 
       // Save file for next check
       fs.writeFile('events.json', JSON.stringify(guildEvents), error => {
-        if (error) console.log(error)
+        if (error) return console.log(error)
+        console.log('Saved events.json')
       })
     }
   })
