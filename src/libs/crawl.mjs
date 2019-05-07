@@ -1,6 +1,7 @@
 import dotenv from 'dotenv'
 dotenv.config()
 import fs from 'fs'
+import Diff from 'diff'
 import getGuildEvents from './getGuildEvents.mjs'
 import sendToWebhook from './sendToWebhook.mjs';
 
@@ -25,17 +26,14 @@ async function crawl () {
       // To detect new events
       try {
         const oldEvents = JSON.parse(fs.readFileSync('events.json', 'utf8'))
-        const lastOldEvent = oldEvents[oldEvents.length - 1]
-        const lastCurrentEvent = guildEvents[guildEvents.length - 1]
 
-        console.log(`Old Event - [${lastOldEvent.date}]`)
-        console.log(`Current Event - [${lastCurrentEvent.date}]`)
-        if (lastOldEvent.date !== lastCurrentEvent.date) {
-          console.log('New event detected.')
-          sendToWebhook(lastCurrentEvent)
-        } else {
-          console.log('No new event detected.')
-        }
+        const results = Diff.diffJson(oldEvents, guildEvents)
+        results.forEach(result => {
+          if (result.added) {
+            const newEvents = JSON.parse(`[${result.value.replace(/(\\n|\s|')/, '')}]`)
+            newEvents.forEach(event => sendToWebhook(event))
+          }
+        })
       } catch (error) {
         console.log(error)
       }
