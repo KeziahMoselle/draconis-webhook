@@ -25,6 +25,24 @@ This WebHook sends new guild events to a Discord channel.
 7. Crawl again, diff between the `events.json` and the new JSON and send ONLY the new events
 8. Repeat
 
+## Setup
+
+### Environment variables
+
+- `DISCORD_WEBHOOK_URL` Events will be POSTed at this URL
+- `BLIZZARD_EMAIL` Needed to log in to the events page
+- `BLIZZARD_PASSWORD` Needed to log in to the events page
+- `GUILD_NAME` The Guild name, it is used for the Discord embed message
+- `GUILD_THUMBNAIL_URL` It is used for the Discord embed thumbnail
+- `INTERVAL` It will run the crawl every `INTERVAL` minutes
+- `NODE_ENV` If set to `development` it will run Puppeteer in headful mode
+
+### Run the project
+
+1. Clone the repo
+2. `yarn` or `npm install`
+3. `npm run start` to run the bot
+
 ## Tech stack
 
 - Node.js
