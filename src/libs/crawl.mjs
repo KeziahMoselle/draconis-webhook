@@ -24,8 +24,7 @@ async function crawl () {
       // Check for differences between new events and file
       // To detect new events
       try {
-        const data = fs.readFileSync('events.json', 'utf8')
-        const oldEvents = JSON.parse(data)
+        const oldEvents = JSON.parse(fs.readFileSync('events.json', 'utf8'))
         const lastOldEvent = oldEvents[oldEvents.length - 1]
         const lastCurrentEvent = guildEvents[guildEvents.length - 1]
 
