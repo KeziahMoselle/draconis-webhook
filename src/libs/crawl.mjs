@@ -18,7 +18,11 @@ async function crawl () {
       })
 
       // Send all current events to the WebHook
-      guildEvents.forEach(event => sendToWebhook(event))
+      let timeout = 0
+      for (const i in guildEvents) {
+        setTimeout(() => sendToWebhook(guildEvents[i]), timeout)
+        timeout += 2500
+      }
     } else {
       // Send only new events here
       

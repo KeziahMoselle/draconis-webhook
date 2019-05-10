@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
-function generateEmbed (title, date, img = process.env.GUILD_THUMBNAIL_URL) {
+function generateEmbed (title, date, img, thumbnail = process.env.GUILD_THUMBNAIL_URL) {
   return {
     "content": `Nouvel événement pour <${process.env.GUILD_NAME}>`,
     "embeds": [
