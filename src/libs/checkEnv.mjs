@@ -1,10 +1,12 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
-const listVar = ['DISCORD_WEBHOOK_URL',
-'BLIZZARD_EMAIL',
-'BLIZZARD_PASSWORD',
-'INTERVAL']
+const listVar = [
+  'DISCORD_WEBHOOK_URL',
+  'BLIZZARD_EMAIL',
+  'BLIZZARD_PASSWORD',
+  'INTERVAL'
+]
 
 function checkEnv () {
   let errorsEncountered = 0
