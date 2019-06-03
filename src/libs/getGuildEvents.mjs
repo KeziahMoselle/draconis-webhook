@@ -1,7 +1,8 @@
 import getEvents from './getEvents.mjs'
+import formatDate from './formatDate.mjs'
 
 async function getGuildEvents () {
-  let guildEvents = []
+  const guildEvents = []
   const events = await getEvents()
 
   events.forEach(event => {
@@ -15,7 +16,18 @@ async function getGuildEvents () {
     }
   })
 
-  return guildEvents
+  const formattedGuildEvents = guildEvents.map(event => {
+    const regex = /^(.*)\/(.*)\/(.*) (.*)$/gm
+    const [, day, month, year, hour] = regex.exec(event.date)
+
+    return {
+      title: event.title,
+      date: formatDate(year, month, day, hour),
+      img: event.img
+    }
+  })
+
+  return formattedGuildEvents
 }
 
 export default getGuildEvents
