@@ -3,7 +3,7 @@ import frLocale from 'date-fns/locale/fr'
 
 function formatDate (year, month, day, hour) {
   let formattedDate = format(
-    new Date(year, month, day),
+    new Date(year, month - 1, day),
     'dddd D MMMM',
     { locale: frLocale }
   )
