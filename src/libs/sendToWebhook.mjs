@@ -1,5 +1,6 @@
 import axios from 'axios'
 import generateEmbed from './generateEmbed.mjs'
+import logger from './log.mjs'
 
 async function sendToWebhook (event) {
   try {
@@ -7,12 +8,12 @@ async function sendToWebhook (event) {
     const response = await axios.post(process.env.DISCORD_WEBHOOK_URL, embed)
     
     if (response.status >= 200 && response.status <= 299) {
-      console.log(`[${event.title} - ${event.date}] - Has been sent to the WebHook.`)
+      logger.success(`[${event.title} - ${event.date}] - Has been sent to the WebHook.`)
     } else {
-      console.log(`Error while sending [${event.title} - ${event.date}] - ${response.status}`)
+      logger.success(`Error while sending [${event.title} - ${event.date}] - ${response.status}`)
     }
   } catch (error) {
-    console.log(error)
+    logger.error(error)
   }
 }
 

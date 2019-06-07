@@ -1,6 +1,7 @@
 import dotenv from 'dotenv'
 dotenv.config()
 import puppeteer from 'puppeteer'
+import logger from './log.mjs'
 
 async function getEvents () {
   const browser = await puppeteer.launch({
@@ -11,11 +12,10 @@ async function getEvents () {
   await page.type('#accountName', process.env.BLIZZARD_EMAIL)
   await page.type('#password', process.env.BLIZZARD_PASSWORD)
   await page.click('#submit')
-  console.log('Logging in...')
+  logger.await('[%d/4] - Logging in...', 1)
   await page.waitForNavigation()
-  console.log('Logged in.')
-  
-  console.log('Scrapping...')
+  logger.success('[%d/4] - Logged in...', 2)
+  logger.await('[%d/4] - Scrapping...', 3)
   const data = await page.evaluate(() => {
     const events = []
   
@@ -31,7 +31,7 @@ async function getEvents () {
 
     return events
   })
-  console.log('Scrapping finished.')
+  logger.success('[%d/4] - Scrapping finished.', 4)
 
   await browser.close()
 

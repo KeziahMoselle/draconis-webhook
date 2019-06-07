@@ -3,7 +3,8 @@ dotenv.config()
 import fs from 'fs'
 import Diff from 'diff'
 import getGuildEvents from './getGuildEvents.mjs'
-import sendToWebhook from './sendToWebhook.mjs';
+import sendToWebhook from './sendToWebhook.mjs'
+import logger from './log.mjs'
 
 async function crawl () {
   const guildEvents = await getGuildEvents()
@@ -14,7 +15,7 @@ async function crawl () {
 
       // Save file for next check
       fs.writeFile('events.json', JSON.stringify(guildEvents), error => {
-        if (error) console.log(error)
+        if (error) logger.error(error)
       })
 
       // Send all current events to the WebHook
@@ -39,13 +40,13 @@ async function crawl () {
           }
         })
       } catch (error) {
-        console.log(error)
+        logger.error(error)
       }
 
       // Save file for next check
       fs.writeFile('events.json', JSON.stringify(guildEvents), error => {
-        if (error) return console.log(error)
-        console.log('Saved events.json')
+        if (error) return logger.error(error)
+        logger.success('Saved events.json')
       })
     }
   })
