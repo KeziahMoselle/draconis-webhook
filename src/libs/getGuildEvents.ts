@@ -1,5 +1,5 @@
-import getEvents from './getEvents.mjs'
-import formatDate from './formatDate.mjs'
+import getEvents from './getEvents'
+import formatDate from './formatDate'
 
 async function getGuildEvents () {
   const guildEvents = []

@@ -1,6 +1,3 @@
-import dotenv from 'dotenv'
-dotenv.config()
-
 function generateEmbed (title, date, img, thumbnail = process.env.GUILD_THUMBNAIL_URL) {
   let color = 16777215
   // Raid + Dungeon

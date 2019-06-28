@@ -1,5 +1,4 @@
-import dotenv from 'dotenv'
-dotenv.config()
+import 'dotenv/config'
 
 const listVar = [
   'DISCORD_WEBHOOK_URL',

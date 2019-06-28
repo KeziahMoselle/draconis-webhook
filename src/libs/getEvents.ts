@@ -1,5 +1,3 @@
-import dotenv from 'dotenv'
-dotenv.config()
 import puppeteer from 'puppeteer'
 
 async function getEvents () {
@@ -19,7 +17,7 @@ async function getEvents () {
   const data = await page.evaluate(() => {
     const events = []
   
-    const eventsElements = document.querySelectorAll('.event-summary')
+    const eventsElements: any = document.querySelectorAll('.event-summary')
 
     eventsElements.forEach(eventElement => {
       events.push({

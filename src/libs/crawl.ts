@@ -1,9 +1,7 @@
-import dotenv from 'dotenv'
-dotenv.config()
 import fs from 'fs'
-import Diff from 'diff'
-import getGuildEvents from './getGuildEvents.mjs'
-import sendToWebhook from './sendToWebhook.mjs';
+import diff from './diff'
+import getGuildEvents from './getGuildEvents'
+import sendToWebhook from './sendToWebhook';
 
 async function crawl () {
   const guildEvents = await getGuildEvents()
@@ -11,7 +9,6 @@ async function crawl () {
   fs.access('events.json', fs.constants.F_OK, (error) => {
     if (error) {
       // First time running the bot
-
       // Save file for next check
       fs.writeFile('events.json', JSON.stringify(guildEvents), error => {
         if (error) console.log(error)
@@ -31,13 +28,10 @@ async function crawl () {
       try {
         const oldEvents = JSON.parse(fs.readFileSync('events.json', 'utf8'))
 
-        const results = Diff.diffJson(oldEvents, guildEvents)
-        results.forEach(result => {
-          if (result.added) {
-            const newEvents = JSON.parse(`[${result.value.replace(/(\\n|\s|')/, '')}]`)
-            newEvents.forEach(event => sendToWebhook(event))
-          }
-        })
+        const newEvents = diff(oldEvents, guildEvents)
+        if (newEvents) {
+          newEvents.forEach(event => sendToWebhook(event));
+        }
       } catch (error) {
         console.log(error)
       }

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import generateEmbed from './generateEmbed.mjs'
+import generateEmbed from './generateEmbed'
 
 async function sendToWebhook (event) {
   try {
@@ -10,6 +10,10 @@ async function sendToWebhook (event) {
       console.log(`[${event.title} - ${event.date}] - Has been sent to the WebHook.`)
     } else {
       console.log(`Error while sending [${event.title} - ${event.date}] - ${response.status}`)
+      // Retry if error
+      setTimeout(() => {
+        sendToWebhook(event)
+      }, 10000);
     }
   } catch (error) {
     console.log(error)
