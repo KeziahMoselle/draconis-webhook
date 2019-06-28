@@ -21,7 +21,7 @@ This WebHook sends new guild events to a Discord channel.
 
 4. Filter guild events with the `getGuildEvents()` function
 5. Save the events under an `events.json` file, if the file does not exist it assumes it's the first crawl and it will sends ALL the current events to catch up
-6. Wait for the interval (Currently commented)
+6. Wait for the interval
 7. Crawl again, diff between the `events.json` and the new JSON and send ONLY the new events
 8. Repeat
 
