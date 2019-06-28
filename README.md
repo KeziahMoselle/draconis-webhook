@@ -21,7 +21,7 @@ This WebHook sends new guild events to a Discord channel.
 
 4. Filter guild events with the `getGuildEvents()` function
 5. Save the events under an `events.json` file, if the file does not exist it assumes it's the first crawl and it will sends ALL the current events to catch up
-6. Wait for the interval
+6. Wait for the interval (Currently commented)
 7. Crawl again, diff between the `events.json` and the new JSON and send ONLY the new events
 8. Repeat
 
@@ -35,13 +35,19 @@ This WebHook sends new guild events to a Discord channel.
 - `GUILD_NAME` It is used for the Discord embed message
 - `GUILD_THUMBNAIL_URL` It is used for the Discord embed thumbnail
 - `INTERVAL` It will run the crawl every `INTERVAL` minutes
-- `NODE_ENV` If set to `development` it will run Puppeteer in headful mode
+- `DEV` If set to a truthy value it will run Puppeteer in headful mode and it will not send requests to the WebHook (only print them in the console)
 
 ### Run the project
 
 1. Clone the repo
 2. `yarn` or `npm install`
-3. `npm run start` to run the bot
+3. `npm run start` to run the bot once
+4. `npm run dev` will build watch and run nodemon
+
+### Tests
+
+`npm run test` or `npm run test:watch`
+
 
 ## Tech stack
 

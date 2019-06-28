@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer'
 
 async function getEvents () {
   const browser = await puppeteer.launch({
-    headless: process.env.NODE_ENV === 'development' ? false : true
+    headless: process.env.DEV ? false : true
   })
   const page = await browser.newPage()
   await page.goto('https://eu.battle.net/wow/fr/vault/character/event')
