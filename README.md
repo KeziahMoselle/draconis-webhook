@@ -1,3 +1,7 @@
+# This project is DEPRECATED
+## The guild events URL https://eu.battle.net/wow/en/vault/character/event doesn't exist anymore.
+## https://eu.forums.blizzard.com/en/wow/t/guild-calendar-access-gone/90172/2
+
 # draconis-webhook
 
 This WebHook sends new guild events to a Discord channel.
